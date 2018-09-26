@@ -1,5 +1,6 @@
+"use strict";
 // Enemies our player must avoid
-var Enemy = function(y) {
+const Enemy = function(y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -21,11 +22,12 @@ Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
 
     if(this.x > 500) {
-        this.x = -50;
-        //this.speed = 100 + Math.floor(Math.random * 220);
+        this.x = 0;
+        this.speed = 100 + Math.floor(Math.random() * 100);
     }
 
-    if(this.x < player.x + 90 && this.x + 90 > player.x && this.y < player.y + 70 && this.y + 70 > player.y ) {
+    //This checks if the player is anywhere near the enemy.
+    if(this.x < player.x + 70 && this.x + 70 > player.x && this.y < player.y + 50 && this.y + 50 > player.y ) {
         player.x = 200;
         player.y = 400;
     }
@@ -40,7 +42,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-var Player = function() {
+const Player = function() {
     this.x = 200;
     this.y = 400;
     this.sprite = 'images/char-boy.png';
@@ -62,17 +64,16 @@ Player.prototype.handleInput = function(key) {
         this.y += 70;
     }
     if(key === 'left' && this.x > 0) {
-        this.x -= 90;
+        this.x -= 60;
     }
     if(key === 'right' && this.x < 400) {
-        this.x += 90;
+        this.x += 60;
     } 
 
     if(this.y < 0) {
-        setTimeout(function() {
-            player.x = 200;
-            player.y = 400;
-        }, 800);
+        
+        player.x = 200;
+        player.y = 400;
     }
 
 }
@@ -80,7 +81,11 @@ Player.prototype.handleInput = function(key) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-let allEnemies = [new Enemy(60), new Enemy(147), new Enemy(230)];
+let allEnemies = [new Enemy(70), new Enemy(140), new Enemy(210)];
+
+for(var i=0;i<3;i++){
+    var enemy=new Enemy(i*70);
+} 
 
 let player = new Player();
 
