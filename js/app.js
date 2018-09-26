@@ -71,9 +71,10 @@ Player.prototype.handleInput = function(key) {
     } 
 
     if(this.y < 0) {
-        
+        setTimeout(function() {
         player.x = 200;
         player.y = 400;
+        }, 500);
     }
 
 }
